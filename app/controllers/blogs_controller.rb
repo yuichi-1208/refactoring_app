@@ -5,7 +5,9 @@ class BlogsController < ApplicationController
   # GET /blogs.json
   def index
     # @blogs = Blog.all
-    @blogs = Blog.order(created_at: :desc).limit(3)
+    # @blogs = Blog.order(created_at: :desc).limit(3)
+    # @blogs = Blog.latest(3)
+    @blogs = Blog.latest
   end
 
   # GET /blogs/1
@@ -29,6 +31,7 @@ class BlogsController < ApplicationController
 
     respond_to do |format|
       if @blog.save
+        # @blog.title_change
         format.html { redirect_to @blog, notice: 'Blog was successfully created.' }
         format.json { render :show, status: :created, location: @blog }
       else
